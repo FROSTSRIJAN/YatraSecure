@@ -439,9 +439,9 @@ const IndiaMap = () => {
           mapData[stateId].link = `javascript:window.handleIndiaStateClick('${stateId}', '${stateName}')`;
         });
 
-        // Configure map settings - Use 0 for responsive width
+        // Configure map settings - Use proper dimensions for full India map
         (window as any).map_cfg.mapWidth = 900; // Fixed width for better control
-        (window as any).map_cfg.mapHeight = 700; // Fixed height
+        (window as any).map_cfg.mapHeight = 1000; // Increased height to show full map including Kerala
         (window as any).map_cfg.shadowAllow = false;
         (window as any).map_cfg.statesHoverColor = '#64BEC8';
         (window as any).map_cfg.borderColor = '#313131';
@@ -479,7 +479,7 @@ const IndiaMap = () => {
             const viewBox = svg.getAttribute('viewBox');
             console.log('SVG viewBox:', viewBox);
             
-            // Force SVG to be fully visible with proper scaling
+            // Force SVG to be fully visible with proper scaling and centering
             const svgElement = svg as HTMLElement;
             svgElement.style.cssText = `
               display: block !important; 
@@ -492,10 +492,18 @@ const IndiaMap = () => {
               will-change: auto;
             `;
             
-            // Ensure viewBox is set for proper scaling
+            // Ensure viewBox is set for proper scaling - adjusted to show full India map
             if (!viewBox || viewBox === '0 0 0 0') {
-              svg.setAttribute('viewBox', '0 0 900 700');
-              console.log('✓ Set default viewBox');
+              svg.setAttribute('viewBox', '0 0 900 1000');
+              console.log('✓ Set default viewBox to 900x1000 for full map');
+            }
+            
+            // Center the SVG within container
+            const container = document.getElementById('india-map-container');
+            if (container) {
+              container.style.display = 'flex';
+              container.style.alignItems = 'center';
+              container.style.justifyContent = 'center';
             }
             
             // Optimize SVG rendering
@@ -575,8 +583,8 @@ const IndiaMap = () => {
             inset 0 0 76px -10px #64BEC8,
             inset 0 0 var(--pulse2) -10px #64BEC8;
           pointer-events: none;
-          opacity: 0.4;
-          z-index: 0;
+          opacity: 0.2;
+          z-index: 1;
           will-change: transform;
         }
 
@@ -651,12 +659,15 @@ const IndiaMap = () => {
         }
       `}</style>
 
-      <div className="min-h-screen bg-[#081621] relative overflow-hidden">
+      <div className="min-h-screen relative overflow-hidden bg-cover bg-center bg-no-repeat" style={{ backgroundImage: 'url(/mountain.jpg)' }}>
+        {/* Dark overlay for better text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70 z-0"></div>
+        
         {/* Animated Earth Background */}
         <div className="earth"></div>
 
         {/* Header */}
-        <div className="relative z-10 bg-gradient-to-r from-orange-500/20 via-transparent to-green-500/20 backdrop-blur-sm py-16 border-b border-white/10">
+        <div className="relative z-10 bg-gradient-to-r from-orange-500/10 via-transparent to-green-500/10 backdrop-blur-md py-16 border-b border-white/10">
           <div className="container mx-auto px-4">
             <button
               onClick={() => navigate('/')}
@@ -665,11 +676,11 @@ const IndiaMap = () => {
               ← Back to Home
             </button>
             <h1 className="text-5xl md:text-7xl font-bold text-center mb-4 tracking-tight">
-              <span className="bg-gradient-to-r from-orange-400 via-yellow-300 to-green-400 bg-clip-text text-transparent animate-pulse">
+              <span className="bg-gradient-to-r from-orange-400 via-yellow-300 to-green-400 bg-clip-text text-transparent drop-shadow-2xl">
                 Explore India
               </span>
             </h1>
-            <p className="text-center text-gray-300 text-lg md:text-xl max-w-3xl mx-auto font-light">
+            <p className="text-center text-gray-200 text-lg md:text-xl max-w-3xl mx-auto font-light drop-shadow-lg">
               Click on any state to discover emergency contacts, tourist destinations, culture, cuisine, and more
             </p>
           </div>
@@ -677,13 +688,13 @@ const IndiaMap = () => {
 
         {/* Map Section */}
         <div className="container mx-auto px-4 py-12 relative z-10">
-          <div className="bg-white/10 backdrop-blur-md rounded-3xl shadow-2xl p-8 border border-white/20">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-white drop-shadow-lg">
+          <div className="bg-white/5 backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-white/10">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-white drop-shadow-2xl">
               Interactive India Map
             </h2>
             
             {/* Map Container */}
-            <div className="relative flex items-center justify-center" style={{ minHeight: '650px', width: '100%' }}>
+            <div className="relative flex items-center justify-center" style={{ minHeight: '950px', width: '100%' }}>
               {!mapLoaded && (
                 <div className="absolute inset-0 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm rounded-xl z-50 border-2 border-cyan-500/30">
                   <div className="text-center">
@@ -695,14 +706,9 @@ const IndiaMap = () => {
               )}
               <div 
                 id="india-map-container" 
-                className={`w-full bg-white/5 backdrop-blur-sm border-2 border-cyan-500/30 rounded-xl p-6 shadow-2xl animate-smooth ${!mapLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-700`}
+                className={`w-full max-w-5xl bg-white/5 backdrop-blur-sm border-2 border-cyan-500/30 rounded-xl p-4 shadow-2xl animate-smooth ${!mapLoaded ? 'opacity-0' : 'opacity-100'} transition-opacity duration-700 flex items-center justify-center`}
                 style={{ 
-                  minHeight: '650px', 
-                  maxWidth: '1000px',
-                  margin: '0 auto',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
+                  minHeight: '950px'
                 }}
               />
             </div>

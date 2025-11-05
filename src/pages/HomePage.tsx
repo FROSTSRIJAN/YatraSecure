@@ -357,14 +357,21 @@ const HomePage = () => {
       </section>
 
       {/* Core Features */}
-      <section id="features" className="py-20 bg-card/50">
-        <div className="container mx-auto px-4">
+      <section 
+        id="features" 
+        className="py-20 relative bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: 'url(/mountain.jpg)' }}
+      >
+        {/* Dark overlay for better contrast */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/75 to-black/80"></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16 animate-fadeInUp">
-            <Badge variant="secondary" className="mb-4">
+            <Badge variant="secondary" className="mb-4 bg-orange-600/90 text-white border-orange-400/50 hover:bg-orange-500">
               Cutting-Edge Technology
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Core Safety Features</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-2xl">Core Safety Features</h2>
+            <p className="text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-lg">
               Advanced technology ensuring tourist safety across North East India's diverse landscapes
             </p>
           </div>
@@ -373,18 +380,18 @@ const HomePage = () => {
             {coreFeatures.map((feature, index) => (
               <Card 
                 key={index} 
-                className="card-cultural border-0 hover:shadow-cultural transition-all duration-500 hover:-translate-y-2 cursor-pointer group"
+                className="border-0 bg-white/10 backdrop-blur-xl hover:bg-white/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer group"
                 onClick={feature.action}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <CardHeader className="text-center pb-4">
-                  <div className="mx-auto bg-primary/10 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
-                    <feature.icon className="h-8 w-8 text-primary group-hover:rotate-12 transition-transform" />
+                  <div className="mx-auto bg-gradient-to-br from-orange-500/20 to-green-500/20 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4 group-hover:from-orange-500/30 group-hover:to-green-500/30 group-hover:scale-110 transition-all duration-300 border border-white/20">
+                    <feature.icon className="h-8 w-8 text-orange-400 group-hover:rotate-12 transition-transform" />
                   </div>
-                  <CardTitle className="text-lg group-hover:text-primary transition-colors">{feature.title}</CardTitle>
+                  <CardTitle className="text-lg text-white group-hover:text-orange-300 transition-colors">{feature.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-center">
+                  <CardDescription className="text-center text-gray-200">
                     {feature.description}
                   </CardDescription>
                 </CardContent>
