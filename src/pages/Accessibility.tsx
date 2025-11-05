@@ -24,7 +24,7 @@ const Accessibility = () => {
             <div className="flex items-center space-x-2">
               <Shield className="h-6 w-6 text-primary" />
               <span className="text-lg font-bold bg-gradient-cultural bg-clip-text text-transparent">
-                NE Tourist Safety
+                YATRA SECURE
               </span>
             </div>
           </div>
@@ -50,7 +50,7 @@ const Accessibility = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                The NE Tourist Safety System is committed to ensuring digital accessibility for people 
+                YATRA SECURE is committed to ensuring digital accessibility for people 
                 with disabilities. We continually improve the user experience for everyone and apply 
                 relevant accessibility standards to ensure our emergency and cultural exploration 
                 features are usable by all visitors to Northeast India.
@@ -227,7 +227,7 @@ const Accessibility = () => {
                 </div>
                 <div className="flex items-center space-x-2">
                   <Globe className="h-4 w-4 text-primary" />
-                  <span className="text-muted-foreground">Accessibility Team, NE Tourist Safety System</span>
+                  <span className="text-muted-foreground">Accessibility Team, YATRA SECURE</span>
                 </div>
               </div>
               <p className="text-sm text-muted-foreground mt-4">

@@ -20,6 +20,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Accessibility from "./pages/Accessibility";
 import NotFound from "./pages/NotFound";
+import IndiaMap from "./pages/IndiaMap";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const App = () => (
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/about" element={<AboutUs />} />
+              <Route path="/india-map" element={<IndiaMap />} />
               <Route path="/emergency-sos" element={<EmergencySOS />} />
               <Route path="/explore-culture" element={<ExploreCulture />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />

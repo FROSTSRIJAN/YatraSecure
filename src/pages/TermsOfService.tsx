@@ -24,7 +24,7 @@ const TermsOfService = () => {
             <div className="flex items-center space-x-2">
               <Shield className="h-6 w-6 text-primary" />
               <span className="text-lg font-bold bg-gradient-cultural bg-clip-text text-transparent">
-                NE Tourist Safety
+                YATRA SECURE
               </span>
             </div>
           </div>
@@ -36,7 +36,7 @@ const TermsOfService = () => {
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-4">Terms of Service</h1>
           <p className="text-muted-foreground text-lg">
-            Legal terms and conditions for using NE Tourist Safety System
+            Legal terms and conditions for using YATRA SECURE
           </p>
           <p className="text-sm text-muted-foreground mt-2">
             Last updated: September 12, 2025
@@ -53,7 +53,7 @@ const TermsOfService = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                By accessing and using the NE Tourist Safety System, you accept and agree to be bound by 
+                By accessing and using YATRA SECURE, you accept and agree to be bound by 
                 these Terms of Service. If you do not agree to these terms, please do not use our services. 
                 These terms apply to all users including tourists, police personnel, transport operators, 
                 and system administrators.
@@ -208,7 +208,7 @@ const TermsOfService = () => {
                 </div>
                 <div className="flex items-center space-x-2">
                   <Globe className="h-4 w-4 text-primary" />
-                  <span className="text-muted-foreground">Legal Department, NE Tourist Safety System</span>
+                  <span className="text-muted-foreground">Legal Department, YATRA SECURE</span>
                 </div>
               </div>
             </CardContent>

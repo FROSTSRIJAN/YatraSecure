@@ -24,7 +24,7 @@ const PrivacyPolicy = () => {
             <div className="flex items-center space-x-2">
               <Shield className="h-6 w-6 text-primary" />
               <span className="text-lg font-bold bg-gradient-cultural bg-clip-text text-transparent">
-                NE Tourist Safety
+                YATRA SECURE
               </span>
             </div>
           </div>
@@ -174,7 +174,7 @@ const PrivacyPolicy = () => {
                 </div>
                 <div className="flex items-center space-x-2">
                   <Globe className="h-4 w-4 text-primary" />
-                  <span className="text-muted-foreground">Privacy Officer, NE Tourist Safety System</span>
+                  <span className="text-muted-foreground">Privacy Officer, YATRA SECURE</span>
                 </div>
               </div>
             </CardContent>

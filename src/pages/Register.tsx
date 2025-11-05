@@ -78,7 +78,7 @@ const Register = () => {
           <div className="flex items-center justify-center space-x-2 mb-4">
             <Shield className="h-10 w-10 text-primary" />
             <span className="text-2xl font-bold bg-gradient-cultural bg-clip-text text-transparent">
-              NE Tourist Safety
+              YATRA SECURE
             </span>
           </div>
           <p className="text-muted-foreground">Join our safety community</p>

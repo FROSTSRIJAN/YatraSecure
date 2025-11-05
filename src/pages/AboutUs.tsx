@@ -15,7 +15,7 @@ const AboutUs = () => {
           <div className="flex items-center space-x-2">
             <Shield className="h-8 w-8 text-primary" />
             <span className="text-xl font-bold bg-gradient-cultural bg-clip-text text-transparent">
-              NE Tourist Safety System
+              YATRA SECURE
             </span>
           </div>
           <Button variant="outline" onClick={() => navigate("/")}>
