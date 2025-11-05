@@ -417,31 +417,30 @@ const HomePage = () => {
       </section>
 
       {/* Dashboards Preview */}
-      <section id="dashboards" className="py-12 md:py-20 relative overflow-hidden bg-background">
+      <section id="dashboards" className="py-12 md:py-20 relative overflow-hidden bg-black">
         {/* Video Background */}
-        <div className="absolute inset-0 z-0 bg-black/10">
+        <div className="absolute inset-0 z-0">
           <video 
             autoPlay 
             loop 
             muted 
             playsInline
             preload="auto"
-            className="absolute inset-0 w-full h-full object-cover opacity-40 md:opacity-50"
-            style={{ mixBlendMode: 'screen' }}
+            className="absolute inset-0 w-full h-full object-cover opacity-70"
           >
             <source src="/stellar-colors-of-the-void.960x540.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/80 to-background/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60"></div>
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-12 md:mb-16 animate-fadeInUp">
-            <Badge variant="secondary" className="mb-4 text-xs sm:text-sm backdrop-blur-sm bg-secondary/80">
+            <Badge variant="secondary" className="mb-4 text-xs sm:text-sm backdrop-blur-sm bg-primary/20 text-primary-foreground border-primary/30">
               Smart Access Control
             </Badge>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 px-4">Role-Based Access Dashboards</h2>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground px-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 px-4 text-white">Role-Based Access Dashboards</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-200 px-4">
               Specialized interfaces for different user types
             </p>
           </div>
@@ -455,7 +454,7 @@ const HomePage = () => {
             ].map((dashboard, index) => (
               <Card 
                 key={index} 
-                className={`${dashboard.bg} backdrop-blur-md bg-white/10 border border-white/20 hover:shadow-elegant transition-all duration-500 cursor-pointer group hover:scale-105 md:hover:-translate-y-2`}
+                className={`${dashboard.bg} backdrop-blur-xl bg-white/15 border border-white/30 hover:shadow-elegant transition-all duration-500 cursor-pointer group hover:scale-105 md:hover:-translate-y-2`}
                 onClick={() => navigate(dashboard.href)}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
