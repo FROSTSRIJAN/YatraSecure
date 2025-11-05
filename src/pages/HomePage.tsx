@@ -417,7 +417,7 @@ const HomePage = () => {
       </section>
 
       {/* Dashboards Preview */}
-      <section id="dashboards" className="py-20 relative overflow-hidden">
+      <section id="dashboards" className="py-12 md:py-20 relative overflow-hidden">
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
           <video 
@@ -425,25 +425,25 @@ const HomePage = () => {
             loop 
             muted 
             playsInline
-            className="absolute inset-0 w-full h-full object-cover opacity-30"
+            className="absolute inset-0 w-full h-full object-cover opacity-20 md:opacity-30"
           >
-            <source src="/stellar-colors-of-the-void.mp4" type="video/mp4" />
+            <source src="/stellar-colors-of-the-void.960x540.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/90 to-background/95"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/85 to-background/95"></div>
         </div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16 animate-fadeInUp">
-            <Badge variant="secondary" className="mb-4">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-12 md:mb-16 animate-fadeInUp">
+            <Badge variant="secondary" className="mb-4 text-xs sm:text-sm">
               Smart Access Control
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Role-Based Access Dashboards</h2>
-            <p className="text-xl text-muted-foreground">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 px-4">Role-Based Access Dashboards</h2>
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground px-4">
               Specialized interfaces for different user types
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto">
             {[
               { role: "Tourist", description: "SOS, attractions, cultural content", bg: "bg-primary/10", href: "/dashboard", icon: Users },
               { role: "Police", description: "Incident monitoring, emergency response", bg: "bg-destructive/10", href: "/police", icon: Shield },
@@ -452,21 +452,26 @@ const HomePage = () => {
             ].map((dashboard, index) => (
               <Card 
                 key={index} 
-                className={`${dashboard.bg} backdrop-blur-sm bg-white/10 border border-white/20 hover:shadow-elegant transition-all duration-500 cursor-pointer group hover:-translate-y-2`}
+                className={`${dashboard.bg} backdrop-blur-md bg-white/10 border border-white/20 hover:shadow-elegant transition-all duration-500 cursor-pointer group hover:scale-105 md:hover:-translate-y-2`}
                 onClick={() => navigate(dashboard.href)}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <CardHeader className="text-center">
-                  <div className="mx-auto bg-background/50 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-300">
-                    <dashboard.icon className="h-8 w-8 group-hover:rotate-12 transition-transform" />
+                <CardHeader className="text-center pb-3 sm:pb-6">
+                  <div className="mx-auto bg-background/60 p-3 sm:p-4 rounded-full w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-all duration-300">
+                    <dashboard.icon className="h-6 w-6 sm:h-8 sm:w-8 group-hover:rotate-12 transition-transform" />
                   </div>
-                  <CardTitle className="group-hover:text-primary transition-colors">{dashboard.role} Dashboard</CardTitle>
-                  <CardDescription>{dashboard.description}</CardDescription>
+                  <CardTitle className="text-base sm:text-lg md:text-xl group-hover:text-primary transition-colors">
+                    {dashboard.role} Dashboard
+                  </CardTitle>
+                  <CardDescription className="text-xs sm:text-sm mt-2">
+                    {dashboard.description}
+                  </CardDescription>
                 </CardHeader>
-                <CardContent className="text-center">
+                <CardContent className="text-center pt-0">
                   <Button 
                     variant="outline" 
-                    className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300"
+                    size="sm"
+                    className="w-full text-xs sm:text-sm group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300"
                   >
                     Access Dashboard
                   </Button>
@@ -809,10 +814,10 @@ const CulturalCarousel = ({ culturalAddons, openCulturalModal }: { culturalAddon
   const itemIds = ['bihu-geet', 'kaziranga', 'red-panda', 'bamboo-crafts'];
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-between max-w-7xl mx-auto">
+    <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-between max-w-7xl mx-auto px-4 sm:px-6">
       {/* Carousel Section - Left Side */}
       <div className="w-full lg:w-[45%] flex justify-center items-center order-2 lg:order-1">
-        <div className="relative w-full max-w-md h-[500px] perspective-1000 px-20 lg:px-16">
+        <div className="relative w-full max-w-md h-[400px] sm:h-[500px] perspective-1000 px-16 sm:px-20 lg:px-16">
           {/* Navigation Arrows - Desktop */}
           <button
             onClick={() => updateCarousel(currentIndex - 1)}
@@ -833,16 +838,16 @@ const CulturalCarousel = ({ culturalAddons, openCulturalModal }: { culturalAddon
           <button
             onClick={() => updateCarousel(currentIndex - 1)}
             disabled={isAnimating}
-            className="lg:hidden absolute top-4 left-1/2 -translate-x-1/2 z-40 bg-primary/10 hover:bg-primary/20 p-3 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="lg:hidden absolute top-2 sm:top-4 left-1/2 -translate-x-1/2 z-40 bg-primary/10 hover:bg-primary/20 p-2 sm:p-3 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <ChevronUp className="w-5 h-5 text-primary" />
+            <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
           </button>
           <button
             onClick={() => updateCarousel(currentIndex + 1)}
             disabled={isAnimating}
-            className="lg:hidden absolute bottom-4 left-1/2 -translate-x-1/2 z-40 bg-primary/10 hover:bg-primary/20 p-3 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="lg:hidden absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 z-40 bg-primary/10 hover:bg-primary/20 p-2 sm:p-3 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <ChevronUp className="w-5 h-5 text-primary rotate-180" />
+            <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 text-primary rotate-180" />
           </button>
 
           {/* Cards */}
@@ -852,7 +857,7 @@ const CulturalCarousel = ({ culturalAddons, openCulturalModal }: { culturalAddon
                 key={index}
                 type="button"
                 disabled={isAnimating}
-                className={`absolute w-[300px] h-[180px] bg-white rounded-2xl overflow-hidden shadow-2xl cursor-pointer transition-all duration-700 ease-out disabled:cursor-not-allowed ${getCardClass(index)}`}
+                className={`absolute w-[250px] sm:w-[300px] h-[150px] sm:h-[180px] bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl cursor-pointer transition-all duration-700 ease-out disabled:cursor-not-allowed ${getCardClass(index)}`}
                 onClick={() => handleCardClick(index, item.id)}
                 style={{
                   transformStyle: 'preserve-3d',
@@ -869,23 +874,23 @@ const CulturalCarousel = ({ culturalAddons, openCulturalModal }: { culturalAddon
           </div>
 
           {/* Current Item Info - Below Carousel on Mobile */}
-          <div className="lg:hidden text-center mt-8">
-            <h3 className="text-2xl font-bold mb-1 text-primary">
+          <div className="lg:hidden text-center mt-6 sm:mt-8">
+            <h3 className="text-xl sm:text-2xl font-bold mb-1 text-primary">
               {culturalItems[currentIndex].name}
             </h3>
-            <p className="text-base text-muted-foreground uppercase tracking-wider">
+            <p className="text-sm sm:text-base text-muted-foreground uppercase tracking-wider">
               {culturalItems[currentIndex].role}
             </p>
             
             {/* Dots Navigation */}
-            <div className="flex gap-3 justify-center mt-6">
+            <div className="flex gap-2 sm:gap-3 justify-center mt-4 sm:mt-6">
               {culturalItems.map((_, index) => (
                 <button
                   key={index}
                   type="button"
                   disabled={isAnimating}
                   onClick={() => updateCarousel(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 disabled:cursor-not-allowed ${
+                  className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 disabled:cursor-not-allowed ${
                     index === currentIndex 
                       ? 'bg-primary scale-125' 
                       : 'bg-primary/20 hover:bg-primary/40'
