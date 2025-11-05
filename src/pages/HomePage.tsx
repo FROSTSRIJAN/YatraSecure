@@ -401,78 +401,21 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Cultural Heritage Section */}
-      <section id="culture" className="py-20 pattern-tribal">
+      {/* Cultural Heritage Section with Carousel */}
+      <section id="culture" className="py-20 pattern-tribal relative overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16 animate-fadeInUp">
-            <Badge variant="secondary" className="mb-4">
+          <div className="text-center lg:text-right mb-16 animate-fadeInUp lg:pr-8">
+            <Badge variant="secondary" className="mb-4 bg-primary/10 text-primary border-primary/20">
               Heritage & Tradition
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Cultural Integration</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto lg:ml-auto lg:mr-0">
               Celebrating North East India's rich heritage through technology
             </p>
           </div>
           
-          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-            <div className="space-y-6">
-              <h3 className="text-3xl md:text-4xl font-bold mb-6">Rich Cultural Heritage</h3>
-              <div className="grid sm:grid-cols-2 gap-6">
-                {culturalAddons.map((addon, index) => (
-                  <div 
-                    key={index} 
-                    className="flex items-start space-x-4 cursor-pointer hover:bg-accent/10 p-4 rounded-xl transition-all duration-300 hover:scale-105 group"
-                    onClick={() => {
-                      const itemIds = ['bihu-geet', 'kaziranga', 'red-panda', 'bamboo-crafts'];
-                      openCulturalModal(itemIds[index]);
-                    }}
-                  >
-                    <div className="bg-accent/20 p-3 rounded-lg group-hover:bg-accent/30 group-hover:scale-110 transition-all duration-300">
-                      <addon.icon className="h-6 w-6 text-accent group-hover:rotate-12 transition-transform" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-2 group-hover:text-accent transition-colors">{addon.title}</h4>
-                      <p className="text-sm text-muted-foreground">{addon.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              <img 
-                src={traditionalDance} 
-                alt="Traditional Dance" 
-                className="rounded-xl shadow-elegant cursor-pointer hover:opacity-90 hover:scale-105 transition-all duration-300"
-                onClick={() => openCulturalModal('manipuri-dance')}
-              />
-              <img 
-                src={traditionalCrafts} 
-                alt="Traditional Crafts" 
-                className="rounded-xl shadow-elegant mt-8 cursor-pointer hover:opacity-90 hover:scale-105 transition-all duration-300"
-                onClick={() => openCulturalModal('bamboo-crafts')}
-              />
-            </div>
-          </div>
-          
-        <div className="card-cultural rounded-2xl p-8 text-center hover:shadow-2xl transition-all duration-300 group">
-          <img 
-            src={northeastNature} 
-            alt="North East Nature" 
-            className="w-full h-48 object-cover rounded-xl mb-6 cursor-pointer hover:opacity-90 transition-all duration-300 group-hover:scale-105"
-            onClick={() => openCulturalModal('red-panda')}
-          />
-          <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">Biodiversity & Natural Wonders</h3>
-          <p className="text-muted-foreground mb-6">
-            Explore the unique flora, fauna, and pristine landscapes of North East India while staying safe with our integrated monitoring system.
-          </p>
-          <Button 
-            variant="outline" 
-            className="bg-accent/10 border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-all duration-300"
-            onClick={() => openCulturalModal('red-panda')}
-          >
-            Discover Nature
-          </Button>
-        </div>
+          {/* Cultural Carousel */}
+          <CulturalCarousel culturalAddons={culturalAddons} openCulturalModal={openCulturalModal} />
         </div>
       </section>
 
@@ -802,6 +745,154 @@ const HomePage = () => {
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
       />
+    </div>
+  );
+};
+
+// Cultural Carousel Component
+const CulturalCarousel = ({ culturalAddons, openCulturalModal }: { culturalAddons: any[], openCulturalModal: (id: string) => void }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const culturalItems = [
+    { image: "/culture 1.jpg", name: "Traditional Dance", role: "Folk Performance", id: "manipuri-dance" },
+    { image: "/culture 2.jpg", name: "Tribal Art", role: "Heritage Crafts", id: "bamboo-crafts" },
+    { image: "/culture 4.jpg", name: "Cultural Festival", role: "Celebration", id: "bihu-geet" },
+    { image: "/culture 5.jpg", name: "Natural Beauty", role: "Landscapes", id: "kaziranga" },
+    { image: "/culture 6.png", name: "Traditional Attire", role: "Cultural Dress", id: "red-panda" },
+    { image: "/cullture 3.png", name: "Traditional Food", role: "Culinary Heritage", id: "bihu-geet" }
+  ];
+
+  const updateCarousel = (newIndex: number) => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentIndex((newIndex + culturalItems.length) % culturalItems.length);
+    setTimeout(() => setIsAnimating(false), 800);
+  };
+
+  const getCardClass = (index: number) => {
+    const offset = (index - currentIndex + culturalItems.length) % culturalItems.length;
+    if (offset === 0) return "center z-30 scale-110 opacity-100";
+    if (offset === 1) return "down-1 z-20 translate-y-32 scale-90 opacity-90";
+    if (offset === 2) return "down-2 z-10 translate-y-64 scale-80 opacity-70";
+    if (offset === culturalItems.length - 1) return "up-1 z-20 -translate-y-32 scale-90 opacity-90";
+    if (offset === culturalItems.length - 2) return "up-2 z-10 -translate-y-64 scale-80 opacity-70";
+    return "hidden opacity-0";
+  };
+
+  return (
+    <div className="flex flex-col lg:flex-row gap-12 items-center justify-center max-w-7xl mx-auto">
+      {/* Carousel Section */}
+      <div className="flex-1 flex justify-center items-center w-full lg:w-1/2">
+        <div className="relative w-full max-w-md h-[500px] perspective-1000">
+          {/* Navigation Arrows - Desktop */}
+          <button
+            onClick={() => updateCarousel(currentIndex - 1)}
+            className="hidden lg:block absolute -left-16 top-1/2 -translate-y-1/2 z-40 bg-primary/10 hover:bg-primary/20 p-4 rounded-full transition-all hover:scale-110"
+          >
+            <ChevronUp className="w-6 h-6 text-primary -rotate-90" />
+          </button>
+          <button
+            onClick={() => updateCarousel(currentIndex + 1)}
+            className="hidden lg:block absolute -right-16 top-1/2 -translate-y-1/2 z-40 bg-primary/10 hover:bg-primary/20 p-4 rounded-full transition-all hover:scale-110"
+          >
+            <ChevronUp className="w-6 h-6 text-primary rotate-90" />
+          </button>
+
+          {/* Mobile Navigation */}
+          <button
+            onClick={() => updateCarousel(currentIndex - 1)}
+            className="lg:hidden absolute top-4 left-1/2 -translate-x-1/2 z-40 bg-primary/10 hover:bg-primary/20 p-3 rounded-full transition-all"
+          >
+            <ChevronUp className="w-5 h-5 text-primary" />
+          </button>
+          <button
+            onClick={() => updateCarousel(currentIndex + 1)}
+            className="lg:hidden absolute bottom-4 left-1/2 -translate-x-1/2 z-40 bg-primary/10 hover:bg-primary/20 p-3 rounded-full transition-all"
+          >
+            <ChevronUp className="w-5 h-5 text-primary rotate-180" />
+          </button>
+
+          {/* Cards */}
+          <div className="relative w-full h-full flex flex-col items-center justify-center transform-gpu">
+            {culturalItems.map((item, index) => (
+              <div
+                key={index}
+                className={`absolute w-[350px] h-[200px] bg-white rounded-2xl overflow-hidden shadow-2xl cursor-pointer transition-all duration-700 ease-out ${getCardClass(index)}`}
+                onClick={() => {
+                  updateCarousel(index);
+                  if (index === currentIndex) {
+                    openCulturalModal(item.id);
+                  }
+                }}
+                style={{
+                  transformStyle: 'preserve-3d',
+                  filter: index === currentIndex ? 'none' : 'grayscale(100%)'
+                }}
+              >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-full object-cover transition-all duration-700"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Controls & Info Section */}
+      <div className="flex-1 flex flex-col items-center lg:items-start gap-8 w-full lg:w-1/2">
+        {/* Cultural Info */}
+        <div className="text-center lg:text-left w-full">
+          <h3 className="text-3xl md:text-4xl font-bold mb-2 text-primary transition-all duration-500">
+            {culturalItems[currentIndex].name}
+          </h3>
+          <p className="text-xl text-muted-foreground uppercase tracking-wider">
+            {culturalItems[currentIndex].role}
+          </p>
+        </div>
+
+        {/* Dots Navigation */}
+        <div className="flex gap-3">
+          {culturalItems.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => updateCarousel(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentIndex 
+                  ? 'bg-primary scale-125' 
+                  : 'bg-primary/20 hover:bg-primary/40'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Cultural Add-ons */}
+        <div className="w-full space-y-4">
+          <h4 className="text-2xl font-bold mb-4">Rich Cultural Heritage</h4>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {culturalAddons.map((addon, index) => (
+              <div
+                key={index}
+                className="flex items-start space-x-3 cursor-pointer hover:bg-accent/10 p-3 rounded-xl transition-all duration-300 hover:scale-105 group"
+                onClick={() => {
+                  const itemIds = ['bihu-geet', 'kaziranga', 'red-panda', 'bamboo-crafts'];
+                  openCulturalModal(itemIds[index]);
+                }}
+              >
+                <div className="bg-accent/20 p-2 rounded-lg group-hover:bg-accent/30 group-hover:scale-110 transition-all">
+                  <addon.icon className="h-5 w-5 text-accent" />
+                </div>
+                <div className="flex-1">
+                  <h5 className="font-semibold text-sm mb-1 group-hover:text-accent transition-colors">{addon.title}</h5>
+                  <p className="text-xs text-muted-foreground">{addon.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
