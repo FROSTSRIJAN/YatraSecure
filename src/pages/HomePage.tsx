@@ -795,24 +795,24 @@ const CulturalCarousel = ({ culturalAddons, openCulturalModal }: { culturalAddon
   const itemIds = ['bihu-geet', 'kaziranga', 'red-panda', 'bamboo-crafts'];
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center justify-between max-w-7xl mx-auto">
+    <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-between max-w-7xl mx-auto">
       {/* Carousel Section - Left Side */}
-      <div className="w-full lg:w-1/2 flex justify-center items-center order-2 lg:order-1">
-        <div className="relative w-full max-w-md h-[500px] perspective-1000">
+      <div className="w-full lg:w-[45%] flex justify-center items-center order-2 lg:order-1">
+        <div className="relative w-full max-w-md h-[500px] perspective-1000 px-20 lg:px-16">
           {/* Navigation Arrows - Desktop */}
           <button
             onClick={() => updateCarousel(currentIndex - 1)}
             disabled={isAnimating}
-            className="hidden lg:block absolute -left-16 top-1/2 -translate-y-1/2 z-40 bg-primary/10 hover:bg-primary/20 p-4 rounded-full transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 z-40 bg-primary/10 hover:bg-primary/20 p-3 rounded-full transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <ChevronUp className="w-6 h-6 text-primary -rotate-90" />
+            <ChevronUp className="w-5 h-5 text-primary -rotate-90" />
           </button>
           <button
             onClick={() => updateCarousel(currentIndex + 1)}
             disabled={isAnimating}
-            className="hidden lg:block absolute -right-16 top-1/2 -translate-y-1/2 z-40 bg-primary/10 hover:bg-primary/20 p-4 rounded-full transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 z-40 bg-primary/10 hover:bg-primary/20 p-3 rounded-full transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <ChevronUp className="w-6 h-6 text-primary rotate-90" />
+            <ChevronUp className="w-5 h-5 text-primary rotate-90" />
           </button>
 
           {/* Mobile Navigation */}
@@ -838,7 +838,7 @@ const CulturalCarousel = ({ culturalAddons, openCulturalModal }: { culturalAddon
                 key={index}
                 type="button"
                 disabled={isAnimating}
-                className={`absolute w-[350px] h-[200px] bg-white rounded-2xl overflow-hidden shadow-2xl cursor-pointer transition-all duration-700 ease-out disabled:cursor-not-allowed ${getCardClass(index)}`}
+                className={`absolute w-[300px] h-[180px] bg-white rounded-2xl overflow-hidden shadow-2xl cursor-pointer transition-all duration-700 ease-out disabled:cursor-not-allowed ${getCardClass(index)}`}
                 onClick={() => handleCardClick(index, item.id)}
                 style={{
                   transformStyle: 'preserve-3d',
@@ -884,32 +884,29 @@ const CulturalCarousel = ({ culturalAddons, openCulturalModal }: { culturalAddon
       </div>
 
       {/* Text Content - Right Side */}
-      <div className="w-full lg:w-1/2 order-1 lg:order-2 relative">
-        {/* Gradient Overlay for Desktop */}
-        <div className="hidden lg:block absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background/90 to-transparent pointer-events-none -ml-32"></div>
-        
-        <div className="text-left lg:pr-20 md:pr-8 pr-4 max-w-[480px] mx-auto lg:mx-0 animate-fadeInRight">
+      <div className="w-full lg:w-[55%] order-1 lg:order-2">
+        <div className="text-center lg:text-left lg:pl-8 max-w-[580px] mx-auto lg:mx-0 animate-fadeInRight">
           {/* Badge */}
           <Badge variant="secondary" className="mb-4 bg-primary/10 text-primary border-primary/20 inline-block">
             Heritage & Tradition
           </Badge>
           
           {/* Main Heading */}
-          <h2 className="font-bold mb-4" style={{ fontSize: 'clamp(1.8rem, 2.5vw, 2.8rem)', fontWeight: 700, lineHeight: 1.2 }}>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
             Cultural Integration
           </h2>
           
           {/* Subtitle */}
-          <p className="text-base mb-8" style={{ opacity: 0.85, lineHeight: 1.6 }}>
+          <p className="text-base md:text-lg text-muted-foreground mb-8 leading-relaxed opacity-90">
             Celebrating North East India's rich heritage through technology
           </p>
 
           {/* Desktop Only - Current Item Info */}
-          <div className="hidden lg:block mb-8">
-            <h3 className="text-3xl font-bold mb-2 text-primary transition-all duration-500">
+          <div className="hidden lg:block mb-8 pb-6 border-b border-border/50">
+            <h3 className="text-2xl md:text-3xl font-bold mb-2 text-primary transition-all duration-500">
               {culturalItems[currentIndex].name}
             </h3>
-            <p className="text-lg text-muted-foreground uppercase tracking-wider">
+            <p className="text-sm md:text-base text-muted-foreground uppercase tracking-wider font-medium">
               {culturalItems[currentIndex].role}
             </p>
             
@@ -933,7 +930,7 @@ const CulturalCarousel = ({ culturalAddons, openCulturalModal }: { culturalAddon
 
           {/* Cultural Add-ons */}
           <div className="space-y-4">
-            <h4 className="text-xl font-bold mb-4">Rich Cultural Heritage</h4>
+            <h4 className="text-xl md:text-2xl font-bold mb-4">Rich Cultural Heritage</h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {culturalAddons.map((addon, index) => (
                 <button
@@ -948,7 +945,7 @@ const CulturalCarousel = ({ culturalAddons, openCulturalModal }: { culturalAddon
                   </div>
                   <div className="flex-1">
                     <h5 className="font-semibold text-sm mb-1 group-hover:text-accent transition-colors">{addon.title}</h5>
-                    <p className="text-xs text-muted-foreground">{addon.description}</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{addon.description}</p>
                   </div>
                 </button>
               ))}
