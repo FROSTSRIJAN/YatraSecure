@@ -417,8 +417,22 @@ const HomePage = () => {
       </section>
 
       {/* Dashboards Preview */}
-      <section id="dashboards" className="py-20 bg-secondary/10">
-        <div className="container mx-auto px-4">
+      <section id="dashboards" className="py-20 relative overflow-hidden">
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0">
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-30"
+          >
+            <source src="/stellar-colors-of-the-void.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/90 to-background/95"></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16 animate-fadeInUp">
             <Badge variant="secondary" className="mb-4">
               Smart Access Control
@@ -438,7 +452,7 @@ const HomePage = () => {
             ].map((dashboard, index) => (
               <Card 
                 key={index} 
-                className={`${dashboard.bg} border-0 hover:shadow-elegant transition-all duration-500 cursor-pointer group hover:-translate-y-2`}
+                className={`${dashboard.bg} backdrop-blur-sm bg-white/10 border border-white/20 hover:shadow-elegant transition-all duration-500 cursor-pointer group hover:-translate-y-2`}
                 onClick={() => navigate(dashboard.href)}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
