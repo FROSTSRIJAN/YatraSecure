@@ -143,7 +143,7 @@ const ExploreCulture = () => {
         </div>
       </section>
 
-      {/* Cultural Highlights */}
+      {/* Cultural Highlights - Image Gallery */}
       <section className="py-20 bg-card/30">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -153,63 +153,26 @@ const ExploreCulture = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {culturalHighlights.map((item, index) => (
-              <Card key={index} className="card-cultural border-0 hover:shadow-cultural transition-all duration-300">
-                <div className="relative overflow-hidden">
-                  <img 
-                    src={item.image} 
-                    alt={item.title}
-                    className="w-full h-48 object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
-                    onClick={() => openCulturalModal(item.id)}
-                  />
-                  <div className="absolute top-2 right-2">
-                    <Badge variant="secondary" className="text-xs">
-                      {item.state}
-                    </Badge>
-                  </div>
-                </div>
-                
-                <CardHeader className="pb-3">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <CardTitle className="text-lg mb-1">{item.title}</CardTitle>
-                      <CardDescription className="text-sm text-muted-foreground">
-                        {item.category}
-                      </CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-                
-                <CardContent className="pt-0">
-                  <p className="text-sm text-muted-foreground mb-4">
-                    {item.description}
-                  </p>
-                  
-                  <div className="flex space-x-2">
-                    <Button 
-                      size="sm" 
-                      variant="outline"
-                      className="flex-1 text-xs"
-                      onClick={() => window.open(item.videoUrl, '_blank')}
-                    >
-                      <Play className="h-3 w-3 mr-1" />
-                      Video
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      variant="outline"
-                      className="flex-1 text-xs"
-                      onClick={() => window.open(item.learnMoreUrl, '_blank')}
-                    >
-                      <ExternalLink className="h-3 w-3 mr-1" />
-                      Learn More
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          {/* Beautiful Image Gallery */}
+          <article className="gallery_wrapper">
+            <img src="/culture 1.jpg" alt="Traditional Dance - Folk Performance" />
+            <img src="/culture 2.jpg" alt="Tribal Art - Heritage Crafts" />
+            <img src="/cullture 3.png" alt="Traditional Food - Culinary Heritage" />
+
+            <img src="/culture 4.jpg" alt="Cultural Festival - Celebration" />
+            <img src="/culture 5.jpg" alt="Natural Beauty - Landscapes" />
+
+            <img src="/culture 6.png" alt="Traditional Attire - Cultural Dress" />
+            <img src="/culture 1.jpg" alt="Traditional Music - Folk Heritage" />
+            <img src="/culture 2.jpg" alt="Handicrafts - Artisan Skills" />
+
+            <img src="/cullture 3.png" alt="Local Cuisine - Food Culture" />
+            <img src="/culture 4.jpg" alt="Festivals - Celebrations" />
+
+            <img src="/culture 5.jpg" alt="Nature - Scenic Beauty" />
+            <img src="/culture 6.png" alt="Cultural Dress - Traditional Wear" />
+            <img src="/culture 1.jpg" alt="Dance Forms - Performing Arts" />
+          </article>
         </div>
       </section>
 

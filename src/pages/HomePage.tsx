@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Shield, AlertTriangle, Map, Users, MessageCircle, Camera, Music, Palette, Mail, Phone, MapPin, ExternalLink, Github, Linkedin, Menu, X, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,6 +18,7 @@ const HomePage = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isModalOpening, setIsModalOpening] = useState(false);
 
   // Handle scroll effects
   useEffect(() => {
@@ -49,13 +50,19 @@ const HomePage = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const openCulturalModal = (itemId: string) => {
+  const openCulturalModal = useCallback((itemId: string) => {
+    if (isModalOpening) return; // Prevent rapid clicks
+    
     const item = CULTURAL_DATA.find(item => item.id === itemId);
     if (item) {
+      setIsModalOpening(true);
       setSelectedCulturalItem(item);
       setModalOpen(true);
+      
+      // Reset flag after a short delay
+      setTimeout(() => setIsModalOpening(false), 500);
     }
-  };
+  }, [isModalOpening]);
 
   const coreFeatures = [
     {
@@ -390,8 +397,8 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Cultural Heritage Section */}
-      <section id="culture" className="py-20 pattern-tribal">
+      {/* Cultural Heritage Section with Carousel */}
+      <section id="culture" className="py-20 pattern-tribal relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 animate-fadeInUp">
             <Badge variant="secondary" className="mb-4">
@@ -466,19 +473,35 @@ const HomePage = () => {
       </section>
 
       {/* Dashboards Preview */}
-      <section id="dashboards" className="py-20 bg-secondary/10">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16 animate-fadeInUp">
-            <Badge variant="secondary" className="mb-4">
+      <section id="dashboards" className="py-12 md:py-20 relative overflow-hidden bg-black">
+        {/* Video Background */}
+        <div className="absolute inset-0 z-0">
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            preload="auto"
+            className="absolute inset-0 w-full h-full object-cover opacity-70"
+          >
+            <source src="/stellar-colors-of-the-void.960x540.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60"></div>
+        </div>
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-12 md:mb-16 animate-fadeInUp">
+            <Badge variant="secondary" className="mb-4 text-xs sm:text-sm backdrop-blur-sm bg-primary/20 text-primary-foreground border-primary/30">
               Smart Access Control
             </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Role-Based Access Dashboards</h2>
-            <p className="text-xl text-muted-foreground">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 px-4 text-white">Role-Based Access Dashboards</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-200 px-4">
               Specialized interfaces for different user types
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto">
             {[
               { role: "Tourist", description: "SOS, attractions, cultural content", bg: "bg-primary/10", href: "/dashboard", icon: Users },
               { role: "Police", description: "Incident monitoring, emergency response", bg: "bg-destructive/10", href: "/police", icon: Shield },
@@ -487,21 +510,26 @@ const HomePage = () => {
             ].map((dashboard, index) => (
               <Card 
                 key={index} 
-                className={`${dashboard.bg} border-0 hover:shadow-elegant transition-all duration-500 cursor-pointer group hover:-translate-y-2`}
+                className={`${dashboard.bg} backdrop-blur-xl bg-white/15 border border-white/30 hover:shadow-elegant transition-all duration-500 cursor-pointer group hover:scale-105 md:hover:-translate-y-2`}
                 onClick={() => navigate(dashboard.href)}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <CardHeader className="text-center">
-                  <div className="mx-auto bg-background/50 p-4 rounded-full w-16 h-16 flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-300">
-                    <dashboard.icon className="h-8 w-8 group-hover:rotate-12 transition-transform" />
+                <CardHeader className="text-center pb-3 sm:pb-6">
+                  <div className="mx-auto bg-background/60 p-3 sm:p-4 rounded-full w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition-all duration-300">
+                    <dashboard.icon className="h-6 w-6 sm:h-8 sm:w-8 group-hover:rotate-12 transition-transform" />
                   </div>
-                  <CardTitle className="group-hover:text-primary transition-colors">{dashboard.role} Dashboard</CardTitle>
-                  <CardDescription>{dashboard.description}</CardDescription>
+                  <CardTitle className="text-base sm:text-lg md:text-xl group-hover:text-primary transition-colors">
+                    {dashboard.role} Dashboard
+                  </CardTitle>
+                  <CardDescription className="text-xs sm:text-sm mt-2">
+                    {dashboard.description}
+                  </CardDescription>
                 </CardHeader>
-                <CardContent className="text-center">
+                <CardContent className="text-center pt-0">
                   <Button 
                     variant="outline" 
-                    className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300"
+                    size="sm"
+                    className="w-full text-xs sm:text-sm group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300"
                   >
                     Access Dashboard
                   </Button>
@@ -785,6 +813,217 @@ const HomePage = () => {
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
       />
+    </div>
+  );
+};
+
+// Cultural Carousel Component
+const CulturalCarousel = ({ culturalAddons, openCulturalModal }: { culturalAddons: any[], openCulturalModal: (id: string) => void }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const culturalItems = [
+    { image: "/culture 1.jpg", name: "Traditional Dance", role: "Folk Performance", id: "manipuri-dance" },
+    { image: "/culture 2.jpg", name: "Tribal Art", role: "Heritage Crafts", id: "bamboo-crafts" },
+    { image: "/culture 4.jpg", name: "Cultural Festival", role: "Celebration", id: "bihu-geet" },
+    { image: "/culture 5.jpg", name: "Natural Beauty", role: "Landscapes", id: "kaziranga" },
+    { image: "/culture 6.png", name: "Traditional Attire", role: "Cultural Dress", id: "red-panda" },
+    { image: "/cullture 3.png", name: "Traditional Food", role: "Culinary Heritage", id: "bihu-geet" }
+  ];
+
+  const updateCarousel = (newIndex: number) => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrentIndex((newIndex + culturalItems.length) % culturalItems.length);
+    setTimeout(() => setIsAnimating(false), 800);
+  };
+
+  const handleCardClick = (index: number, itemId: string) => {
+    if (isAnimating) return;
+    
+    if (index === currentIndex) {
+      openCulturalModal(itemId);
+    } else {
+      updateCarousel(index);
+    }
+  };
+
+  const handleAddonClick = (itemId: string) => {
+    if (isAnimating) return;
+    openCulturalModal(itemId);
+  };
+
+  const getCardClass = (index: number) => {
+    const offset = (index - currentIndex + culturalItems.length) % culturalItems.length;
+    if (offset === 0) return "center z-30 scale-110 opacity-100";
+    if (offset === 1) return "down-1 z-20 translate-y-32 scale-90 opacity-90";
+    if (offset === 2) return "down-2 z-10 translate-y-64 scale-80 opacity-70";
+    if (offset === culturalItems.length - 1) return "up-1 z-20 -translate-y-32 scale-90 opacity-90";
+    if (offset === culturalItems.length - 2) return "up-2 z-10 -translate-y-64 scale-80 opacity-70";
+    return "hidden opacity-0";
+  };
+
+  const itemIds = ['bihu-geet', 'kaziranga', 'red-panda', 'bamboo-crafts'];
+
+  return (
+    <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center justify-between max-w-7xl mx-auto px-4 sm:px-6">
+      {/* Carousel Section - Left Side */}
+      <div className="w-full lg:w-[45%] flex justify-center items-center order-2 lg:order-1">
+        <div className="relative w-full max-w-md h-[400px] sm:h-[500px] perspective-1000 px-16 sm:px-20 lg:px-16">
+          {/* Navigation Arrows - Desktop */}
+          <button
+            onClick={() => updateCarousel(currentIndex - 1)}
+            disabled={isAnimating}
+            className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 z-40 bg-primary/10 hover:bg-primary/20 p-3 rounded-full transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ChevronUp className="w-5 h-5 text-primary -rotate-90" />
+          </button>
+          <button
+            onClick={() => updateCarousel(currentIndex + 1)}
+            disabled={isAnimating}
+            className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 z-40 bg-primary/10 hover:bg-primary/20 p-3 rounded-full transition-all hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ChevronUp className="w-5 h-5 text-primary rotate-90" />
+          </button>
+
+          {/* Mobile Navigation */}
+          <button
+            onClick={() => updateCarousel(currentIndex - 1)}
+            disabled={isAnimating}
+            className="lg:hidden absolute top-2 sm:top-4 left-1/2 -translate-x-1/2 z-40 bg-primary/10 hover:bg-primary/20 p-2 sm:p-3 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+          </button>
+          <button
+            onClick={() => updateCarousel(currentIndex + 1)}
+            disabled={isAnimating}
+            className="lg:hidden absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 z-40 bg-primary/10 hover:bg-primary/20 p-2 sm:p-3 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <ChevronUp className="w-4 h-4 sm:w-5 sm:h-5 text-primary rotate-180" />
+          </button>
+
+          {/* Cards */}
+          <div className="relative w-full h-full flex flex-col items-center justify-center transform-gpu">
+            {culturalItems.map((item, index) => (
+              <button
+                key={index}
+                type="button"
+                disabled={isAnimating}
+                className={`absolute w-[250px] sm:w-[300px] h-[150px] sm:h-[180px] bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl cursor-pointer transition-all duration-700 ease-out disabled:cursor-not-allowed ${getCardClass(index)}`}
+                onClick={() => handleCardClick(index, item.id)}
+                style={{
+                  transformStyle: 'preserve-3d',
+                  filter: index === currentIndex ? 'none' : 'grayscale(100%)'
+                }}
+              >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-full object-cover transition-all duration-700 pointer-events-none"
+                />
+              </button>
+            ))}
+          </div>
+
+          {/* Current Item Info - Below Carousel on Mobile */}
+          <div className="lg:hidden text-center mt-6 sm:mt-8">
+            <h3 className="text-xl sm:text-2xl font-bold mb-1 text-primary">
+              {culturalItems[currentIndex].name}
+            </h3>
+            <p className="text-sm sm:text-base text-muted-foreground uppercase tracking-wider">
+              {culturalItems[currentIndex].role}
+            </p>
+            
+            {/* Dots Navigation */}
+            <div className="flex gap-2 sm:gap-3 justify-center mt-4 sm:mt-6">
+              {culturalItems.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  disabled={isAnimating}
+                  onClick={() => updateCarousel(index)}
+                  className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 disabled:cursor-not-allowed ${
+                    index === currentIndex 
+                      ? 'bg-primary scale-125' 
+                      : 'bg-primary/20 hover:bg-primary/40'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Text Content - Right Side */}
+      <div className="w-full lg:w-[55%] order-1 lg:order-2">
+        <div className="text-center lg:text-left lg:pl-8 max-w-[580px] mx-auto lg:mx-0 animate-fadeInRight">
+          {/* Badge */}
+          <Badge variant="secondary" className="mb-4 bg-primary/10 text-primary border-primary/20 inline-block">
+            Heritage & Tradition
+          </Badge>
+          
+          {/* Main Heading */}
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+            Cultural Integration
+          </h2>
+          
+          {/* Subtitle */}
+          <p className="text-base md:text-lg text-muted-foreground mb-8 leading-relaxed opacity-90">
+            Celebrating North East India's rich heritage through technology
+          </p>
+
+          {/* Desktop Only - Current Item Info */}
+          <div className="hidden lg:block mb-8 pb-6 border-b border-border/50">
+            <h3 className="text-2xl md:text-3xl font-bold mb-2 text-primary transition-all duration-500">
+              {culturalItems[currentIndex].name}
+            </h3>
+            <p className="text-sm md:text-base text-muted-foreground uppercase tracking-wider font-medium">
+              {culturalItems[currentIndex].role}
+            </p>
+            
+            {/* Dots Navigation */}
+            <div className="flex gap-3 mt-6">
+              {culturalItems.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  disabled={isAnimating}
+                  onClick={() => updateCarousel(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 disabled:cursor-not-allowed ${
+                    index === currentIndex 
+                      ? 'bg-primary scale-125' 
+                      : 'bg-primary/20 hover:bg-primary/40'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Cultural Add-ons */}
+          <div className="space-y-4">
+            <h4 className="text-xl md:text-2xl font-bold mb-4">Rich Cultural Heritage</h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {culturalAddons.map((addon, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  disabled={isAnimating}
+                  className="flex items-start space-x-3 text-left hover:bg-accent/10 p-3 rounded-xl transition-all duration-300 hover:scale-105 group disabled:cursor-not-allowed disabled:opacity-50"
+                  onClick={() => handleAddonClick(itemIds[index])}
+                >
+                  <div className="bg-accent/20 p-2 rounded-lg group-hover:bg-accent/30 group-hover:scale-110 transition-all flex-shrink-0">
+                    <addon.icon className="h-5 w-5 text-accent" />
+                  </div>
+                  <div className="flex-1">
+                    <h5 className="font-semibold text-sm mb-1 group-hover:text-accent transition-colors">{addon.title}</h5>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{addon.description}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
