@@ -79,12 +79,12 @@ const TouristDashboard = () => {
             <Shield className="h-8 w-8 text-primary" />
             <div>
               <h1 className="text-xl font-bold">Tourist Dashboard</h1>
-              <p className="text-sm text-muted-foreground">Welcome to North East India</p>
+              <p className="text-sm text-muted-foreground">Welcome to India</p>
             </div>
           </div>
           <div className="flex items-center space-x-4">
             <Badge variant="outline" className="bg-primary/10 text-primary border-primary/30">
-              Location: Guwahati, Assam
+              Location: New Delhi, India
             </Badge>
             <Button variant="outline" onClick={handleLogout}>
               <LogOut className="h-4 w-4 mr-2" />
@@ -182,7 +182,7 @@ const TouristDashboard = () => {
               <CardHeader>
                 <CardTitle className="flex items-center space-x-2">
                   <Music className="h-5 w-5 text-accent" />
-                  <span>Folk Songs of North East</span>
+                  <span>Folk Songs of India</span>
                 </CardTitle>
                 <CardDescription>Traditional melodies from across the region</CardDescription>
               </CardHeader>

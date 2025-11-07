@@ -16,9 +16,7 @@ import TouristDashboard from "./pages/TouristDashboard";
 import PoliceDashboard from "./pages/PoliceDashboard";
 import TransportDashboard from "./pages/TransportDashboard";
 import SuperAdminDashboard from "./pages/SuperAdminDashboard";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import TermsOfService from "./pages/TermsOfService";
-import Accessibility from "./pages/Accessibility";
+
 import NotFound from "./pages/NotFound";
 import IndiaMap from "./pages/IndiaMap";
 
@@ -40,9 +38,7 @@ const App = () => (
               <Route path="/india-map" element={<IndiaMap />} />
               <Route path="/emergency-sos" element={<EmergencySOS />} />
               <Route path="/explore-culture" element={<ExploreCulture />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/terms-of-service" element={<TermsOfService />} />
-              <Route path="/accessibility" element={<Accessibility />} />
+    
               <Route 
                 path="/dashboard" 
                 element={

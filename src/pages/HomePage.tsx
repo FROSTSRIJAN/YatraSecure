@@ -65,12 +65,6 @@ const HomePage = () => {
       action: () => navigate("/emergency-sos")
     },
     {
-      icon: Shield,
-      title: "Blockchain Safety ID",
-      description: "Secure, immutable digital identity system for tourists with encrypted personal data protection.",
-      action: () => scrollToSection('dashboards')
-    },
-    {
       icon: Map,
       title: "Interactive India Map",
       description: "Explore Indian states with emergency contacts, tourist spots, culture, cuisine, and festivals - all in one place!",
@@ -256,11 +250,13 @@ const HomePage = () => {
             muted 
             playsInline
             className="w-full h-full object-cover"
-            style={{ filter: 'brightness(0.7) contrast(1.1)' }}
+            // Increased brightness for better visibility
+            style={{ filter: 'brightness(1.05) contrast(1.05)' }}
           >
             <source src="/Welcome to India ! [CINEMATIC TRAVEL FILM].mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0, 0, 0, 0.45)' }} />
+          {/* Slightly lighter overlay so the video shows through more */}
+          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0, 0, 0, 0.25)' }} />
         </div>
         
         <div className="container mx-auto px-4 z-10 text-center">
@@ -345,14 +341,7 @@ const HomePage = () => {
             </div>
           </div>
           
-          {/* Badge */}
-          <div className="mt-8 animate-fadeInUp" style={{ animationDelay: '0.3s' }}>
-            <div className="inline-block backdrop-blur-md bg-white/10 border border-white/20 rounded-full px-6 py-3">
-              <span className="text-white/95 font-medium text-sm md:text-base">
-                🛡️ AI + Blockchain Powered Safety System
-              </span>
-            </div>
-          </div>
+          {/* Badge removed per request */}
         </div>
       </section>
 
@@ -360,10 +349,10 @@ const HomePage = () => {
       <section 
         id="features" 
         className="py-20 relative bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/mountain.jpg)' }}
+        style={{ backgroundImage: 'url(/mountain.jpg)', filter: 'brightness(1.2)' }}
       >
-        {/* Dark overlay for better contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/75 to-black/80"></div>
+        {/* Lighter overlay for better brightness */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/50"></div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16 animate-fadeInUp">
@@ -372,11 +361,11 @@ const HomePage = () => {
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-2xl">Core Safety Features</h2>
             <p className="text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-lg">
-              Advanced technology ensuring tourist safety across North East India's diverse landscapes
+              Advanced technology ensuring tourist safety across India's diverse landscapes
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {coreFeatures.map((feature, index) => (
               <Card 
                 key={index} 
@@ -410,7 +399,7 @@ const HomePage = () => {
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Cultural Integration</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Celebrating North East India's rich heritage through technology
+              Celebrating India's rich heritage through technology
             </p>
           </div>
           
@@ -457,13 +446,13 @@ const HomePage = () => {
         <div className="card-cultural rounded-2xl p-8 text-center hover:shadow-2xl transition-all duration-300 group">
           <img 
             src={northeastNature} 
-            alt="North East Nature" 
+            alt="Indian Nature" 
             className="w-full h-48 object-cover rounded-xl mb-6 cursor-pointer hover:opacity-90 transition-all duration-300 group-hover:scale-105"
             onClick={() => openCulturalModal('red-panda')}
           />
           <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors">Biodiversity & Natural Wonders</h3>
           <p className="text-muted-foreground mb-6">
-            Explore the unique flora, fauna, and pristine landscapes of North East India while staying safe with our integrated monitoring system.
+            Explore the unique flora, fauna, and pristine landscapes of India while staying safe with our integrated monitoring system.
           </p>
           <Button 
             variant="outline" 
@@ -540,11 +529,11 @@ const HomePage = () => {
                 Smart Safety System
               </p>
               <p className="text-sm text-muted-foreground">
-                Protecting travelers in North East India with cutting-edge technology while 
+                Protecting travelers across India with cutting-edge technology while 
                 celebrating our rich cultural heritage and traditional wisdom.
               </p>
               <p className="text-xs text-muted-foreground">
-                🧡 Made with love for North East India
+                🧡 Made with love for India
               </p>
             </div>
 
@@ -598,10 +587,10 @@ const HomePage = () => {
                 <div className="space-y-1">
                   <div className="flex items-center space-x-1 text-sm">
                     <MapPin className="h-4 w-4 text-primary" />
-                    <span className="font-medium text-foreground">Seven Sister States</span>
+                    <span className="font-medium text-foreground">All States of India</span>
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    Assam, Arunachal Pradesh, Manipur, Meghalaya, Mizoram, Nagaland, Tripura
+                    From Kashmir to Kanyakumari, Gujarat to Arunachal Pradesh
                   </p>
                 </div>
                 <div className="space-y-1">
@@ -627,10 +616,10 @@ const HomePage = () => {
               <div className="space-y-3 text-sm">
                 <div className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors">
                   <MapPin className="h-4 w-4 text-primary" />
-                  <span>Guwahati, Assam</span>
+                  <span>New Delhi, India</span>
                 </div>
                 <div className="flex items-center space-x-2 text-muted-foreground">
-                  <span className="text-xs">North East India</span>
+                  <span className="text-xs">All India Coverage</span>
                 </div>
                 <button 
                   onClick={() => navigate("/emergency-sos")}
@@ -692,12 +681,6 @@ const HomePage = () => {
               </p>
               <div className="flex space-x-6 text-sm">
                 <button 
-                  onClick={() => navigate("/privacy-policy")} 
-                  className="text-muted-foreground hover:text-primary transition-colors hover:underline"
-                >
-                  Privacy Policy
-                </button>
-                <button 
                   onClick={() => navigate("/terms-of-service")} 
                   className="text-muted-foreground hover:text-primary transition-colors hover:underline"
                 >
@@ -712,7 +695,7 @@ const HomePage = () => {
               </div>
             </div>
             <p className="text-xs text-muted-foreground mt-4 text-center">
-              Developed with ❤️ for the beautiful North Eastern states of India
+              Developed for incredible India
             </p>
           </div>
         </div>
@@ -739,7 +722,7 @@ const HomePage = () => {
             <div className="bg-accent/10 rounded-lg p-3 text-sm">
               <p className="font-medium mb-1">👋 Welcome!</p>
               <p className="text-muted-foreground">
-                I'm your AI assistant for North East India. I can help you with:
+                I'm your AI assistant for India. I can help you with:
               </p>
             </div>
             <div className="space-y-2 text-sm">

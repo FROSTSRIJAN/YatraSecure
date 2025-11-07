@@ -29,7 +29,7 @@ const AboutUs = () => {
         <div className="absolute inset-0 z-0">
           <img 
             src={heroImage} 
-            alt="North East India" 
+            alt="India" 
             className="w-full h-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/70 to-background/90" />
@@ -56,10 +56,10 @@ const AboutUs = () => {
             <div>
               <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
               <p className="text-muted-foreground mb-6 leading-relaxed">
-                The North East Tourist Safety & Incident Response System is dedicated to protecting travelers 
-                while celebrating the rich cultural heritage of North East India. We combine cutting-edge 
+                The YATRA SECURE Tourist Safety & Incident Response System is dedicated to protecting travelers 
+                while celebrating the rich cultural heritage of India. We combine cutting-edge 
                 blockchain technology with AI-powered safety measures to ensure every tourist can explore 
-                our region with confidence.
+                our country with confidence.
               </p>
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
@@ -68,7 +68,7 @@ const AboutUs = () => {
                 </div>
                 <div className="flex items-center space-x-3">
                   <Heart className="h-6 w-6 text-primary" />
-                  <span>Preserve and promote North Eastern culture</span>
+                  <span>Preserve and promote Indian culture</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Globe className="h-6 w-6 text-primary" />
@@ -86,7 +86,7 @@ const AboutUs = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  To make North East India the safest and most culturally enriching tourist destination 
+                  To make India the safest and most culturally enriching tourist destination 
                   in the world, where technology seamlessly integrates with tradition to create 
                   unforgettable experiences for every visitor.
                 </p>
@@ -96,25 +96,25 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Seven Sister States */}
+      {/* Indian States */}
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Seven Sister States</h2>
+            <h2 className="text-4xl font-bold mb-4">Coverage Across India</h2>
             <p className="text-xl text-muted-foreground">
-              Protecting travelers across the magnificent northeastern states of India
+              Protecting travelers across the magnificent states of India
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { name: "Assam", capital: "Guwahati", feature: "Tea Gardens & Kaziranga" },
-              { name: "Arunachal Pradesh", capital: "Itanagar", feature: "Monasteries & Peaks" },
-              { name: "Manipur", capital: "Imphal", feature: "Classical Dance & Lakes" },
-              { name: "Meghalaya", capital: "Shillong", feature: "Living Bridges & Caves" },
-              { name: "Mizoram", capital: "Aizawl", feature: "Hills & Bamboo Crafts" },
-              { name: "Nagaland", capital: "Kohima", feature: "Tribal Culture & Festivals" },
-              { name: "Tripura", capital: "Agartala", feature: "Palaces & Temples" }
+              { name: "Delhi", capital: "New Delhi", feature: "Capital & Heritage Sites" },
+              { name: "Maharashtra", capital: "Mumbai", feature: "Gateway of India & Beaches" },
+              { name: "Karnataka", capital: "Bengaluru", feature: "Tech Hub & Palaces" },
+              { name: "Rajasthan", capital: "Jaipur", feature: "Forts & Deserts" },
+              { name: "Tamil Nadu", capital: "Chennai", feature: "Temples & Culture" },
+              { name: "Kerala", capital: "Thiruvananthapuram", feature: "Backwaters & Beaches" },
+              { name: "Goa", capital: "Panaji", feature: "Beaches & Portuguese Heritage" }
             ].map((state, index) => (
               <Card key={index} className="card-cultural hover:shadow-elegant transition-all duration-300">
                 <CardHeader className="text-center">
@@ -188,9 +188,9 @@ const AboutUs = () => {
 
           <div className="max-w-2xl mx-auto">
             <Card className="card-cultural p-8 text-center">
-              <h3 className="text-2xl font-bold mb-6">North East India</h3>
+              <h3 className="text-2xl font-bold mb-6">India</h3>
               <div className="space-y-4 text-muted-foreground">
-                <p>📍 Guwahati, Assam, North East India</p>
+                <p>📍 New Delhi, India</p>
                 <p>📞 Emergency: 112 | Tourist Helpline: 1363</p>
                 <p>✉️ safety@netourist.gov.in</p>
               </div>
@@ -207,8 +207,8 @@ const AboutUs = () => {
       {/* Footer */}
       <footer className="bg-card border-t border-border py-8">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p>© 2025 North East Tourist Safety System. All rights reserved.</p>
-          <p className="mt-2">Developed with ❤️ for the beautiful North Eastern states of India</p>
+          <p>© 2025 YATRA SECURE - All India Tourist Safety System. All rights reserved.</p>
+          <p className="mt-2">Developed for incredible India</p>
         </div>
       </footer>
     </div>
